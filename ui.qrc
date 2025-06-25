@@ -1,0 +1,18 @@
+<RCC>
+    <qresource compress="0" prefix="/">
+        <file alias="favicon.ico">ui/favicon.ico</file>
+        <file alias="index.html">ui/index.html</file>
+        <file alias="assets/axios-Dq7h7Pqt.js">ui/assets/axios-Dq7h7Pqt.js</file>
+        <file alias="assets/crypto-DsZkfzRf.css">ui/assets/crypto-DsZkfzRf.css</file>
+        <file alias="assets/crypto-rdjuvmx_.js">ui/assets/crypto-rdjuvmx_.js</file>
+        <file alias="assets/element-plus-1x1FZxgj.js">ui/assets/element-plus-1x1FZxgj.js</file>
+        <file alias="assets/element-plus-BIHauc6T.css">ui/assets/element-plus-BIHauc6T.css</file>
+        <file alias="assets/element-plus-icons-DvaciL5d.js">ui/assets/element-plus-icons-DvaciL5d.js</file>
+        <file alias="assets/index-DS2vjXwz.js">ui/assets/index-DS2vjXwz.js</file>
+        <file alias="assets/index-Xrq_apr9.css">ui/assets/index-Xrq_apr9.css</file>
+        <file alias="assets/lodash-vendor-S0Y0Up6J.js">ui/assets/lodash-vendor-S0Y0Up6J.js</file>
+        <file alias="assets/vendor-wFbPd71c.js">ui/assets/vendor-wFbPd71c.js</file>
+        <file alias="assets/vue-UdrfJAG4.js">ui/assets/vue-UdrfJAG4.js</file>
+        <file alias="assets/vueuse-BrjL-kdC.js">ui/assets/vueuse-BrjL-kdC.js</file>
+    </qresource>
+</RCC>
