@@ -19,26 +19,32 @@ namespace crypto = YanLib::crypto;
 
 struct ReqBaseEncode {
     std::vector<uint8_t> input_text;
+    int32_t bits;
     static std::pair<bool, ReqBaseEncode> from_json(const QJsonObject &obj) {
         ReqBaseEncode base = {};
-        if (!obj.contains("inputText")) {
+        if (!obj.contains("inputText") || !obj.contains("bits")) {
             return std::make_pair(false, base);
         }
         auto temp = obj["inputText"].toString().toStdString();
         base.input_text.assign(temp.begin(), temp.end());
+
+        base.bits = obj["bits"].toInt();
         return std::make_pair(true, base);
     }
 };
 
 struct ReqBaseDecode {
     std::vector<uint8_t> input_text;
+    int32_t bits;
     static std::pair<bool, ReqBaseDecode> from_json(const QJsonObject &obj) {
         ReqBaseDecode base = {};
-        if (!obj.contains("inputText")) {
+        if (!obj.contains("inputText") || !obj.contains("bits")) {
             return std::make_pair(false, base);
         }
         auto temp = obj["inputText"].toString().toStdString();
         base.input_text.assign(temp.begin(), temp.end());
+
+        base.bits = obj["bits"].toInt();
         return std::make_pair(true, base);
     }
 };
@@ -48,12 +54,10 @@ public:
     explicit base_family(QObject *parent = nullptr);
 
     // std::pair<cipher, error code>
-    std::pair<QString, QString> base_crypt(const ReqBaseEncode &req,
-                                           const int32_t bits);
+    std::pair<QString, QString> base_crypt(const ReqBaseEncode &req);
 
     // std::pair<raw, error code>
-    std::pair<QString, QString> base_decrypt(const ReqBaseDecode &req,
-                                             const int32_t bits);
+    std::pair<QString, QString> base_decrypt(const ReqBaseDecode &req);
 signals:
 };
 

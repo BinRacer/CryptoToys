@@ -4,10 +4,9 @@ namespace model {
 
 base_family::base_family(QObject *parent) : QObject{parent} {}
 
-std::pair<QString, QString> base_family::base_crypt(const ReqBaseEncode &req,
-                                                    const int32_t bits) {
+std::pair<QString, QString> base_family::base_crypt(const ReqBaseEncode &req) {
     std::vector<uint8_t> encode;
-    switch (bits) {
+    switch (req.bits) {
     case 16:
         encode = crypto::base16::encode(req.input_text);
         break;
@@ -49,10 +48,10 @@ std::pair<QString, QString> base_family::base_crypt(const ReqBaseEncode &req,
     return std::make_pair(QString::fromUtf8(bytes), QString());
 }
 
-std::pair<QString, QString> base_family::base_decrypt(const ReqBaseDecode &req,
-                                                      const int32_t bits) {
+std::pair<QString, QString>
+base_family::base_decrypt(const ReqBaseDecode &req) {
     std::vector<uint8_t> decode;
-    switch (bits) {
+    switch (req.bits) {
     case 16:
         decode = crypto::base16::decode(req.input_text);
         break;

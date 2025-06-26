@@ -1,14 +1,13 @@
-#include "route/route.h"
+#include "service/rest.h"
 #include <QApplication>
-#include <QHttpServer>
+#include <QIcon>
 #include <QLocale>
 #include <QMainWindow>
-#include <QNetworkReply>
-#include <QTcpServer>
+#include <QNetworkProxyFactory>
+#include <QWebChannel>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include <QWebEngineView>
-#include <QIcon>
 
 void web_setting(QMainWindow &window, QWebEngineView &view);
 
@@ -21,21 +20,14 @@ int main(int argc, char *argv[]) {
     QMainWindow main_window;
     main_window.setWindowIcon(QIcon(":/favicon.ico"));
     QWebEngineView web_view(&main_window);
+
+    QWebChannel channel(web_view.page());
+    service::rest rest;
+    channel.registerObject("restAPI", &rest);
+    web_view.page()->setWebChannel(&channel);
+
     web_setting(main_window, web_view);
     main_window.show();
-
-    route::route route;
-    route.init();
-    auto tcpserver = std::make_unique<QTcpServer>();
-    if (!tcpserver->listen(QHostAddress::LocalHost, 8888) ||
-        !route.bind(tcpserver.get())) {
-        qDebug() << QCoreApplication::translate(
-            "CryptoToys", "Server failed to start http://127.0.0.1:8888/");
-        return 0;
-    }
-    tcpserver.release();
-    qDebug() << QCoreApplication::translate("CryptoToys",
-                                            "Running on http://127.0.0.1:8888/");
     return app.exec();
 }
 

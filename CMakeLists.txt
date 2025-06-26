@@ -9,23 +9,21 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# if(MSVC)
-#     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-# endif()
-
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS
     Core
     Gui
     Widgets
     WebEngineWidgets
-    HttpServer
+    WebChannel
+    Network
 )
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
     Core
     Gui
     Widgets
     WebEngineWidgets
-    HttpServer
+    WebChannel
+    Network
 )
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
@@ -34,8 +32,8 @@ include_directories(${CMAKE_SOURCE_DIR}/YanLib/include)
 
 set(PROJECT_SOURCES
     src/main.cpp
-    src/route/route.h
-    src/route/route.cpp
+    src/service/rest.h
+    src/service/rest.cpp
     src/model/rijndael.h
     src/model/rijndael.cpp
     src/model/pkc.h
@@ -79,7 +77,8 @@ target_link_libraries(CryptoToys PRIVATE
     Qt${QT_VERSION_MAJOR}::Gui
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::WebEngineWidgets
-    Qt${QT_VERSION_MAJOR}::HttpServer
+    Qt${QT_VERSION_MAJOR}::WebChannel
+    Qt${QT_VERSION_MAJOR}::Network
     $<$<CONFIG:Debug>:${CMAKE_SOURCE_DIR}/YanLib/lib/x64/Debug/YanLibd.lib>
     $<$<CONFIG:Release>:${CMAKE_SOURCE_DIR}/YanLib/lib/x64/Release/YanLib.lib>
 )
@@ -88,10 +87,12 @@ target_link_libraries(CryptoToys PRIVATE
     Qt6::Gui
     Qt6::Widgets
     Qt6::WebEngineWidgets
-    Qt6::HttpServer
+    Qt6::WebChannel
+    Qt6::Network
     $<$<CONFIG:Debug>:${CMAKE_SOURCE_DIR}/YanLib/lib/x64/Debug/YanLibd.lib>
     $<$<CONFIG:Release>:${CMAKE_SOURCE_DIR}/YanLib/lib/x64/Release/YanLib.lib>
 )
+target_link_libraries(CryptoToys PRIVATE Qt6::Core)
 
 set(APP_ICON_RESOURCE ${CMAKE_CURRENT_SOURCE_DIR}/app.rc)
 target_sources(CryptoToys PRIVATE ${APP_ICON_RESOURCE})
