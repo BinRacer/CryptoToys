@@ -39,7 +39,7 @@ private:
     void enable_cors(const QHttpServerRequest &request,
                      QHttpServerResponder &responder);
 
-    void ok_resp(QJsonObject &&obj, QHttpServerResponder &responder);
+    void ok_resp(QString data, QHttpServerResponder &responder);
 
     void err_resp(QString message, QHttpServerResponder &responder);
 
@@ -59,10 +59,10 @@ private:
                     QHttpServerResponder &responder);
 
     void base_encode(const QHttpServerRequest &request,
-                     QHttpServerResponder &responder, const int32_t bits);
+                     QHttpServerResponder &responder);
 
     void base_decode(const QHttpServerRequest &request,
-                     QHttpServerResponder &responder, const int32_t bits);
+                     QHttpServerResponder &responder);
 
     void simple_encode(const QHttpServerRequest &request,
                        QHttpServerResponder &responder);
